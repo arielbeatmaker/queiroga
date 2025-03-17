@@ -20,9 +20,6 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-        .particles-container {
-            z-index: 0;
-        }
         section {
             position: relative;
             z-index: 1;
@@ -41,19 +38,11 @@
         .logo:hover {
             filter: drop-shadow(0 4px 8px rgba(255,128,0,0.4));
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
         .service-cta {
-            animation: pulse 3s ease-in-out infinite;
             will-change: transform;
             backface-visibility: hidden;
             transform: translateZ(0);
-        }
-        .scrolling .service-cta {
-            animation-play-state: paused;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
         .service-card {
             border: 1px solid rgba(0,0,0,0.08);
@@ -64,10 +53,6 @@
     </style>
 </head>
 <body>
-    <div class="particles-container">
-        <!-- Partículas decorativas serão geradas via JavaScript -->
-    </div>
-
     <header>
         <div class="header-content">
             <div class="logo-container">

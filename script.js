@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar tema baseado no horário (modo escuro à noite)
   initTheme();
   
-  // Inicializar partículas do background
-  initParticles();
-  
   // Inicializar o slider da seção hero
   initSwiper();
   
@@ -42,54 +39,6 @@ function setupThemeToggle() {
     
     document.body.setAttribute('data-theme', newTheme);
   });
-}
-
-// Inicialização das partículas do background
-function initParticles() {
-  const container = document.querySelector('.particles-container');
-  const colors = ['#ff8000', '#009688', '#ff5722'];
-  const particleCount = window.innerWidth < 768 ? 15 : 30;
-  
-  if (container) {
-    container.innerHTML = ''; // Clear existing particles
-    
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      
-      // Tamanho aleatório
-      const size = Math.random() * 6 + 2;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      
-      // Posição aleatória
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.top = `${Math.random() * 100}%`;
-      
-      // Cor aleatória
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      particle.style.backgroundColor = color;
-      
-      // Animação
-      particle.style.animation = `float ${Math.random() * 10 + 15}s ease-in-out infinite`;
-      particle.style.animationDelay = `${Math.random() * 5}s`;
-      
-      container.appendChild(particle);
-    }
-    
-    // Movimento suave das partículas
-    document.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX / window.innerWidth;
-      const mouseY = e.clientY / window.innerHeight;
-      
-      const particles = document.querySelectorAll('.particle');
-      particles.forEach(particle => {
-        const offsetX = (mouseX - 0.5) * 5;
-        const offsetY = (mouseY - 0.5) * 5;
-        particle.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      });
-    });
-  }
 }
 
 // Inicialização do slider Swiper
