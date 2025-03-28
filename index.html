@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Queiroga Engenharia - Soluções completas em engenharia para seus projetos. Construção civil, projetos residenciais, comerciais e muito mais.">
     <title>Queiroga Engenharia - Soluções em Engenharia</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -50,6 +52,22 @@
         [data-theme="dark"] .service-card {
             border: 1px solid rgba(255,255,255,0.08);
         }
+        
+        /* Ajustes de acessibilidade para toque em dispositivos móveis */
+        @media (max-width: 768px) {
+            .service-cta, .social-icon, .btn-primary, .footer-links a {
+                padding: 12px 20px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .social-icon {
+                width: 44px;
+                height: 44px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -58,28 +76,13 @@
             <div class="logo-container">
                 <img src="./img/logoqueiroga.png" alt="Queiroga Engenharia" class="logo">
             </div>
-            <div class="toggle-container">
-                <button id="theme-toggle">
-                    <span class="toggle-icon light"><i class="fas fa-sun"></i></span>
-                    <span class="toggle-icon dark"><i class="fas fa-moon"></i></span>
-                </button>
-            </div>
+            <!-- Botão de alternâncie de tema removido -->
         </div>
     </header>
 
     <section class="hero">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <!-- Slides serão adicionados aqui -->
-                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
-                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
-                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
         <div class="hero-overlay">
+            <img src="./img/logoqueiroga.png" alt="Queiroga Engenharia" class="hero-logo">
             <h1>Transformando ideias em estruturas sólidas</h1>
             <p>Soluções completas em engenharia para seus projetos</p>
             <a href="#servicos" class="btn-primary">Conheça nossos serviços</a>
@@ -115,33 +118,7 @@
         </div>
     </section>
 
-    <section class="videos-section">
-        <div class="container">
-            <h2 class="section-title">Nossos Vídeos</h2>
-            <p class="section-description">Confira nossos vídeos sobre projetos, dicas técnicas e novidades do setor.</p>
-            
-            <div class="videos-slider">
-                <button class="slider-arrow prev-arrow">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="videos-container">
-                    <div class="video-slide active">
-                        <div class="video-wrapper">
-                            <iframe src="./vídeos/Galpão da Empresa Rico.mp4" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-content">
-                            <h3 class="video-title">Construção do Galpão - Empresa Rico</h3>
-                            <span class="video-date">Publicado em 6 de março de 2024</span>
-                        </div>
-                    </div>
-
-                <button class="slider-arrow next-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+    <!-- Seção de vídeos removida -->
 
     <section id="contato" class="contact">
         <div class="container">
@@ -165,13 +142,7 @@
                             <p>Celular : (75) 99188-6488</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>E-mail</h3>
-                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690a06071d081d0629181c0c001b060e080c070e0c0701081b0008470a0604470b1b">[email&#160;protected]</a></p>
-                        </div>
-                    </div>
+                    <!-- Item de email removido -->
                 </div>
                 <div class="social-media">
                     <h3>Redes Sociais</h3>

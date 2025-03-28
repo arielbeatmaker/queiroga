@@ -1,45 +1,60 @@
 import Swiper from 'swiper';
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Inicializar tema baseado no horário (modo escuro à noite)
-  initTheme();
+  // Definir tema escuro por padrão
+  document.body.setAttribute('data-theme', 'dark');
   
-  // Inicializar o slider da seção hero
-  initSwiper();
+  // Remover a inicialização do slider
+  // initSwiper();
   
   // Renderizar cards de serviços
   renderServiceCards();
   
-  // Configurar alternância de tema
-  setupThemeToggle();
+  // Remover configuração de alternância de tema
+  // setupThemeToggle();
   
   // Animações ao scroll
   setupScrollAnimations();
+  
+  // Remover inicialização do slider de vídeos
+  // setupVideoSlider();
+  
+  // Remover o logo container
+  const logoContainer = document.querySelector('.logo-container');
+  if (logoContainer) {
+    logoContainer.remove();
+  }
+  
+  // Adicionar suporte para melhor responsividade
+  setupResponsiveSupport();
 });
 
-// Configuração de tema baseado no horário
+// Otimização da animação durante rolagem
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    document.body.classList.add('scrolling');
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        document.body.classList.remove('scrolling');
+    }, 150);
+}, { passive: true });
+
+// Função de tema removida - sempre escuro
 function initTheme() {
-  const hour = new Date().getHours();
-  const isDarkHours = hour < 6 || hour >= 18; // Noite entre 18h e 6h
-  
-  if (isDarkHours) {
-    document.body.setAttribute('data-theme', 'dark');
-  } else {
-    document.body.setAttribute('data-theme', 'light');
-  }
+  document.body.setAttribute('data-theme', 'dark');
 }
 
-// Configuração do botão de alternância de tema
-function setupThemeToggle() {
-  const themeToggle = document.getElementById('theme-toggle');
-  
-  themeToggle.addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    document.body.setAttribute('data-theme', newTheme);
-  });
-}
+// Função de alternância de tema removida
+// function setupThemeToggle() {
+//   const themeToggle = document.getElementById('theme-toggle');
+//   
+//   themeToggle.addEventListener('click', () => {
+//     const currentTheme = document.body.getAttribute('data-theme');
+//     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+//     
+//     document.body.setAttribute('data-theme', newTheme);
+//   });
+// }
 
 // Inicialização do slider Swiper
 function initSwiper() {
@@ -160,15 +175,15 @@ function renderServiceCards() {
     serviceCard.innerHTML = `
       <div class="service-image" style="background-image: url('${service.image}')">
         <div class="service-icon">
-          <i class="fas ${service.icon}"></i>
+          <i class="fas ${service.icon}" aria-hidden="true"></i>
         </div>
       </div>
       <div class="service-content">
         <h3 class="service-title">${service.title}</h3>
         <p class="service-description">${service.description}</p>
         <a href="https://wa.me/5575988232914?text=Olá! Gostaria de solicitar um orçamento para ${service.title}" 
-           class="service-cta" target="_blank">
-          Solicitar Projeto <i class="fab fa-whatsapp"></i>
+           class="service-cta" target="_blank" rel="noopener">
+          Solicitar Projeto <i class="fab fa-whatsapp" aria-hidden="true"></i>
         </a>
       </div>
     `;
@@ -197,19 +212,18 @@ function setupScrollAnimations() {
   // Observar seções para animação
   const sections = document.querySelectorAll('section:not(.hero)');
   sections.forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    section.style.opacity = '1'; // Alterado de 0 para 1
+    section.style.transform = 'translateY(0)'; // Removido o deslocamento inicial
+    section.style.transition = 'none'; // Removida a transição
     observer.observe(section);
   });
   
-  // Animação para cards de serviços
+  // Animação para cards de serviços - removida a animação de entrada
   const serviceCards = document.querySelectorAll('.service-card');
   serviceCards.forEach((card, index) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    card.style.transitionDelay = `${index * 0.1}s`;
+    card.style.opacity = '1'; // Sempre visível
+    card.style.transform = 'translateY(0)'; // Sem deslocamento
+    card.style.transition = 'none'; // Sem transição de entrada
     observer.observe(card);
   });
   
@@ -224,12 +238,42 @@ function setupScrollAnimations() {
   document.head.appendChild(style);
 }
 
-// Otimização da animação durante rolagem
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    document.body.classList.add('scrolling');
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        document.body.classList.remove('scrolling');
-    }, 150);
-}, { passive: true });
+// Nova função para melhorar a responsividade
+function setupResponsiveSupport() {
+  // Ajustar altura de cards para serem uniformes em cada linha
+  function adjustCardHeights() {
+    const cards = document.querySelectorAll('.service-card');
+    if (window.innerWidth >= 768) {
+      // Resetar alturas
+      cards.forEach(card => card.style.height = 'auto');
+      
+      // Agrupar cards por linhas
+      const rows = {};
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const row = Math.floor(rect.top);
+        if (!rows[row]) rows[row] = [];
+        rows[row].push(card);
+      });
+      
+      // Definir altura máxima para cada linha
+      Object.values(rows).forEach(rowCards => {
+        const maxHeight = Math.max(...rowCards.map(card => card.offsetHeight));
+        rowCards.forEach(card => card.style.height = `${maxHeight}px`);
+      });
+    } else {
+      // Em dispositivos móveis, deixar altura automática
+      cards.forEach(card => card.style.height = 'auto');
+    }
+  }
+  
+  // Executar no carregamento e no redimensionamento
+  adjustCardHeights();
+  
+  // Usar debounce para melhor performance
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(adjustCardHeights, 250);
+  }, { passive: true });
+}

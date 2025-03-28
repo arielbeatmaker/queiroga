@@ -1,21 +1,22 @@
+/* Remover transição global */
 :root {
-  --primary-color: #ff8000;
-  --secondary-color: #009688;
-  --accent-color: #ff5722;
-  --text-color: #333;
-  --bg-color: #f8f9fa;
-  --card-bg: #ffffff;
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --footer-bg: #002b36;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --border-radius: 8px;
-  --transition: all 0.3s ease;
-  --section-padding: 80px 0;
+    --transition: none;
+    --primary-color: #ff8000;
+    --secondary-color: #009688;
+    --accent-color: #ff5722;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --footer-bg: #002b36;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --section-padding: 80px 0;
 }
 
-/* Dark theme */
+/* Dark theme - agora é o padrão */
 [data-theme="dark"] {
-  --primary-color: #ff9933;
+  --primary-color: #000000;
   --secondary-color: #00bfa5;
   --accent-color: #ff7043;
   --text-color: #f5f5f5;
@@ -32,13 +33,15 @@
   box-sizing: border-box;
 }
 
+/* Otimizar body */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  transition: var(--transition);
+  transition: none;
+  will-change: auto;
 }
 
 /* Header */
@@ -50,8 +53,10 @@ header {
   background-color: var(--header-bg);
   z-index: 1000;
   box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: none;
   backdrop-filter: blur(10px);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .header-content {
@@ -82,6 +87,8 @@ header {
   align-items: center;
 }
 
+/* Remover estilos do botão de alternância de tema */
+/* 
 #theme-toggle {
   background: linear-gradient(to right, #f5f5f5 0%, #f5f5f5 50%, #333 50%, #333 100%);
   border: none;
@@ -121,6 +128,7 @@ header {
   transform: translateX(30px);
   background-color: #333;
 }
+*/
 
 /* Hero Section */
 .hero {
@@ -129,14 +137,25 @@ header {
   width: 100%;
   overflow: hidden;
   margin-top: 90px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Remover as regras do swiper */
+/* 
 .swiper {
   width: 100%;
   height: 100%;
 }
 
 .swiper-slide {
+    background-size: contain !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.8);
+}
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -145,6 +164,7 @@ header {
   align-items: center;
   justify-content: center;
 }
+*/
 
 .hero-overlay {
   position: absolute;
@@ -161,12 +181,20 @@ header {
   padding: 0 20px;
 }
 
+.hero-logo {
+  max-width: 250px;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+/* Remover animações do hero */
 .hero-overlay h1 {
   font-size: 3rem;
   color: white;
   margin-bottom: 20px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  animation: fadeIn 1s ease-out;
+  animation: none;
+  opacity: 1;
 }
 
 .hero-overlay p {
@@ -175,32 +203,33 @@ header {
   margin-bottom: 30px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   max-width: 800px;
-  animation: fadeIn 1s ease-out 0.3s forwards;
-  opacity: 0;
+  animation: none;
+  opacity: 1;
 }
 
 .btn-primary {
   display: inline-block;
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #ff951c; /* Alterado de var(--primary-color) para azul */
+  color: white; /* Alterado de rgb(255, 178, 11) para branco */
   padding: 12px 28px;
   border-radius: 30px;
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(255, 128, 0, 0.3);
-  transition: var(--transition);
-  animation: fadeIn 1s ease-out 0.6s forwards;
-  opacity: 0;
+  box-shadow: 0 4px 15px rgba(255, 134, 21, 0.3); /* Sombra ajustada para combinar com a nova cor */
+  transition: none;
+  animation: none;
+  opacity: 1;
   border: 2px solid transparent;
 }
 
 .btn-primary:hover {
   background-color: transparent;
-  border-color: var(--primary-color);
+  border-color: #f89320; /* Alterado para combinar com a nova cor */
+  color: #ffffff; /* Adicionado para melhor contraste no hover */
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 128, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4); /* Sombra ajustada */
 }
 
 /* Otimização dos botões */
@@ -255,6 +284,8 @@ section {
   padding: var(--section-padding);
   position: relative;
   background-color: var(--bg-color);
+  /* Remover transição */
+  transition: none;
 }
 
 .section-title {
@@ -262,7 +293,7 @@ section {
   text-align: center;
   margin-bottom: 20px;
   position: relative;
-  color: var(--primary-color);
+  color: #ffffff; /* Já está branco */
 }
 
 .section-title::after {
@@ -291,6 +322,147 @@ section {
   align-items: center;
   gap: 50px;
   margin-top: 50px;
+  /* Remover transição */
+  transition: none;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #ffffff; /* Alterado para branco */
+}
+
+/* Service title */
+.service-title {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #ffffff; /* Alterado para branco */
+}
+
+/* Contact item titles */
+.contact-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: #ffffff; /* Alterado para branco */
+}
+
+.social-media h3 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: #ffffff; /* Alterado para branco */
+}
+
+/* Video title - removido */
+/* 
+.video-title {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+*/
+
+/* Remover todos os estilos relacionados a vídeos */
+/* 
+.videos-section {
+  background-color: var(--bg-color);
+}
+
+.videos-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.videos-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.video-slide {
+  display: none;
+  width: 100%;
+}
+
+.video-slide.active {
+  display: block;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-content {
+  padding: 15px 0;
+}
+
+.video-date {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.slider-arrow {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.prev-arrow {
+  left: -20px;
+}
+
+.next-arrow {
+  right: -20px;
+}
+*/
+
+.section-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* About Section */
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-top: 50px;
+  /* Remover transição */
+  transition: none;
 }
 
 .about-text {
@@ -341,12 +513,13 @@ section {
   opacity: 0.7;
 }
 
+/* Remover animações lentas */
 .company-image {
   width: 100%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: none;
 }
 
 .company-image:hover {
@@ -359,22 +532,30 @@ section {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   margin-top: 50px;
+  /* Remover transição */
+  transition: none;
 }
 
+/* Otimizar cartões de serviço */
 .service-card {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
-  transition: var(--transition);
+  /* Remover transição suave */
+  transition: none;
   height: 100%;
   display: flex;
   flex-direction: column;
+  will-change: transform;
+  transform: translateZ(0);
+  opacity: 1 !important; /* Garantir que os cards estejam sempre visíveis */
 }
 
 .service-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s ease;
 }
 
 .service-image {
@@ -423,7 +604,7 @@ section {
 .service-title {
   font-size: 1.4rem;
   margin-bottom: 15px;
-  color: var(--primary-color);
+  color: #ffffff; /* Alterado de var(--primary-color) para branco */
 }
 
 .service-description {
@@ -488,30 +669,17 @@ section {
 
 .contact-item i {
   font-size: 1.8rem;
-  color: var(--primary-color);
+  color: #ff8000; /* Alterado para laranja */
   margin-right: 20px;
   margin-top: 5px;
-}
-
-.contact-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 8px;
-  color: var(--secondary-color);
-}
-
-.contact-item p {
-  margin-bottom: 5px;
-}
-
-.social-media h3 {
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  color: var(--secondary-color);
 }
 
 .social-icons {
   display: flex;
   gap: 15px;
+  flex-direction: row; /* Garantir que estejam na horizontal */
+  justify-content: flex-start; /* Alinhar à esquerda */
+  flex-wrap: wrap; /* Permitir quebra em telas pequenas */
 }
 
 .social-icon {
@@ -520,17 +688,17 @@ section {
   justify-content: center;
   width: 50px;
   height: 50px;
-  background-color: var(--primary-color);
+  background-color: #ff8000; /* Laranja */
   color: white;
   border-radius: 50%;
   font-size: 1.5rem;
-  transition: var(--transition);
+  transition: none;
   text-decoration: none;
 }
 
 .social-icon:hover {
   transform: translateY(-5px);
-  background-color: var(--accent-color);
+  background-color: #ff9933; /* Laranja mais claro no hover */
 }
 
 /* Footer */
@@ -538,6 +706,7 @@ footer {
   background-color: var(--footer-bg);
   color: white;
   padding: 50px 0 20px;
+  transition: none;
 }
 
 .footer-content {
@@ -653,28 +822,16 @@ footer {
   }
 }
 
-/* Animations */
+/* Remover keyframes desnecessários */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from { opacity: 1; transform: none; }
+    to { opacity: 1; transform: none; }
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+    0% { transform: none; }
+    50% { transform: none; }
+    100% { transform: none; }
 }
 
 /* Responsive Design */
@@ -693,6 +850,10 @@ footer {
   
   .hero-overlay p {
     font-size: 1.2rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
 
@@ -714,6 +875,19 @@ footer {
   
   .section-title {
     font-size: 2rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .hero {
+    margin-top: 70px;
+  }
+  
+  .section-padding {
+    padding: 60px 0;
   }
 }
 
@@ -746,4 +920,73 @@ footer {
   .service-content {
     padding: 15px;
   }
+  
+  .hero-overlay h1 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+  
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .section-description {
+    font-size: 1rem;
+  }
+  
+  .about-text h3 {
+    font-size: 1.5rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 360px) {
+  .hero-overlay h1 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-logo {
+    max-width: 180px;
+  }
+  
+  .service-title {
+    font-size: 1.2rem;
+  }
+  
+  .contact-item i {
+    font-size: 1.5rem;
+  }
+}
+
+/* Ajustes para telas grandes */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  .hero-overlay h1 {
+    font-size: 3.5rem;
+  }
+  
+  .hero-overlay p {
+    font-size: 1.8rem;
+  }
+}
+
+/* Garantir que imagens sejam responsivas */
+img {
+  max-width: 100%;
+  height: auto;
 }
