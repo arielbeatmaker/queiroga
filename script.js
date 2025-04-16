@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         autoplay: {
             delay: 5000,
             disableOnInteraction: false,
+            pauseOnMouseEnter: false
         },
         pagination: {
             el: '.swiper-pagination',
@@ -21,16 +22,26 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeEffect: {
             crossFade: true
         },
+        touchRatio: 1,
+        observer: true,
+        observeParents: true
     });
+    
+    // Forçar o autoplay para garantir funcionamento em dispositivos móveis
+    document.addEventListener('touchstart', function() {
+        swiper.autoplay.start();
+    }, {passive: true});
 
-    // Inicializar partículas de fundo
+    // Inicializar partículas de fundo com configurações otimizadas para mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     particlesJS('particles-js', {
         particles: {
             number: {
-                value: 80,
+                value: isMobile ? 30 : 80,
                 density: {
                     enable: true,
-                    value_area: 800
+                    value_area: isMobile ? 600 : 800
                 }
             },
             color: {
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
             size: {
-                value: 3,
+                value: isMobile ? 2 : 3,
                 random: true,
                 anim: {
                     enable: false,
@@ -68,14 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             line_linked: {
                 enable: true,
-                distance: 150,
+                distance: isMobile ? 100 : 150,
                 color: '#0056b3',
                 opacity: 0.4,
-                width: 1
+                width: isMobile ? 0.8 : 1
             },
             move: {
                 enable: true,
-                speed: 2,
+                speed: isMobile ? 1 : 2,
                 direction: 'none',
                 random: false,
                 straight: false,
@@ -89,10 +100,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         interactivity: {
-            detect_on: 'canvas',
+            detect_on: isMobile ? 'window' : 'canvas',
             events: {
                 onhover: {
-                    enable: true,
+                    enable: !isMobile,
                     mode: 'grab'
                 },
                 onclick: {
@@ -120,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     duration: 0.4
                 },
                 push: {
-                    particles_nb: 4
+                    particles_nb: isMobile ? 2 : 4
                 },
                 remove: {
                     particles_nb: 2
@@ -129,6 +140,19 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         retina_detect: true
     });
+    
+    // Garantir que as partículas sejam renderizadas corretamente em dispositivos móveis
+    if (isMobile) {
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                if (window.pJSDom && window.pJSDom[0]) {
+                    window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                    window.pJSDom = [];
+                    particlesJS('particles-js', window.particlesJSConfig);
+                }
+            }, 500);
+        });
+    }
 
     // Tema escuro aplicado por padrão
     // Não é mais necessário alternar entre temas
