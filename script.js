@@ -1,6 +1,4 @@
-// Inicialização do Swiper para o slider de imagens
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar o Swiper
     const swiper = new Swiper('.mySwiper', {
         slidesPerView: 1,
         spaceBetween: 30,
@@ -27,12 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
         observeParents: true
     });
     
-    // Forçar o autoplay para garantir funcionamento em dispositivos móveis
     document.addEventListener('touchstart', function() {
         swiper.autoplay.start();
     }, {passive: true});
 
-    // Inicializar partículas de fundo com configurações otimizadas para mobile
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     particlesJS('particles-js', {
@@ -141,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
         retina_detect: true
     });
     
-    // Garantir que as partículas sejam renderizadas corretamente em dispositivos móveis
     if (isMobile) {
         window.addEventListener('orientationchange', function() {
             setTimeout(function() {
@@ -154,18 +149,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Tema escuro aplicado por padrão
-    // Não é mais necessário alternar entre temas
-
-
-    // Adicionar efeito de animação aos cards de serviço
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add('fade-in');
     });
 
-    // Adicionar animação de entrada para elementos quando eles entram na viewport
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -187,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // Adicionar efeito de hover aos botões de serviço
     const requestBtns = document.querySelectorAll('.request-btn');
     requestBtns.forEach(btn => {
         btn.addEventListener('mouseover', function() {
@@ -199,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Adicionar classes CSS para animações
 document.head.insertAdjacentHTML('beforeend', `
 <style>
     .fade-in {
