@@ -410,7 +410,7 @@ footer {
 
 .footer-content {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: -47px auto;
     display: flex;
     align-items: center;
     justify-content: center;
