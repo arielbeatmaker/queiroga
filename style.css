@@ -5,13 +5,21 @@
     --text-color: #e0e0e0;
     --bg-color: #121212;
     --card-bg: #1e1e1e;
-    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     --header-bg: #1a1a1a;
     --footer-bg: #133751;
     --footer-text: #ffffff;
     --btn-bg: #0077cc;
     --btn-hover: #005fa3;
     --btn-text: #ffffff;
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --gradient-accent: linear-gradient(135deg, var(--accent-color), #ffb347);
+    --border-radius-lg: 15px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 5px;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
 }
 
 * {
@@ -28,7 +36,6 @@ html {
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
     position: relative;
 }
@@ -46,12 +53,13 @@ body {
 header {
     background-color: var(--header-bg);
     padding: 10px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 10;
-    height: 80px; /* Altura fixa para o header */
+    height: 80px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo-container {
@@ -62,25 +70,25 @@ header {
     margin: 0 auto;
     padding: 0 5px;
     gap: 8px;
-    height: 100%; /* Ocupa toda a altura do header */
-    position: relative; /* Para posicionamento das imagens */
+    height: 100%;
+    position: relative;
 }
 
 .logo-image {
     max-width: 240px;
     height: auto;
-    transition: transform 0.3s ease;
-    object-fit: contain; /* Mantém a proporção da imagem */
-    max-height: 90px; /* Limita a altura máxima */
+    transition: transform var(--transition-fast);
+    object-fit: contain;
+    max-height: 90px;
 }
 
 .top-image {
     max-width: 70px;
     height: auto;
     border-radius: 8px;
-    transition: transform 0.3s ease;
-    object-fit: contain; /* Mantém a proporção da imagem */
-    max-height: 70px; /* Limita a altura máxima */
+    transition: transform var(--transition-fast);
+    object-fit: contain;
+    max-height: 70px;
 }
 
 .top-image:hover {
@@ -101,10 +109,11 @@ header {
     width: 800px;
     height: 480px;
     max-width: 100%;
-    border-radius: 10px;
+    border-radius: var(--border-radius-lg);
     overflow: hidden;
     box-shadow: var(--card-shadow);
     margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .swiper-slide img {
@@ -117,13 +126,19 @@ header {
 
 .swiper-button-next, .swiper-button-prev {
     color: var(--primary-color);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
     width: 40px;
     height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-fast);
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 .swiper-button-next:after, .swiper-button-prev:after {
@@ -141,6 +156,9 @@ header {
     color: var(--primary-color);
     position: relative;
     padding-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .section-title::after {
@@ -151,7 +169,8 @@ header {
     transform: translateX(-50%);
     width: 100px;
     height: 3px;
-    background-color: var(--accent-color);
+    background: var(--gradient-accent);
+    border-radius: 3px;
 }
 
 .services-section {
@@ -168,90 +187,97 @@ header {
 
 .service-card {
     background-color: var(--card-bg);
-    border-radius: 10px;
+    border-radius: var(--border-radius-md);
     padding: 30px 20px;
     text-align: center;
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-medium);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    will-change: transform;
 }
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .service-icon {
     font-size: 3rem;
     color: var(--primary-color);
     margin-bottom: 20px;
-    background-color: rgba(0, 86, 179, 0.1);
+    background: rgba(0, 86, 179, 0.1);
     width: 100px;
     height: 100px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--transition-medium), color var(--transition-medium);
+    box-shadow: 0 5px 10px rgba(0, 119, 204, 0.15);
 }
 
 .service-card:hover .service-icon {
-    background-color: rgba(0, 86, 179, 0.2);
-    transform: scale(1.1);
+    background: var(--gradient-primary);
+    color: white;
 }
 
 .service-card h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: var(--primary-color);
+    transition: color var(--transition-fast);
+    font-weight: 600;
+}
+
+.service-card:hover h3 {
+    color: var(--secondary-color);
 }
 
 .request-btn {
     display: inline-block;
-    background-color: var(--btn-bg);
+    background: var(--gradient-primary);
     color: var(--btn-text);
     padding: 12px 25px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     border: none;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     z-index: 1;
-}
-
-.request-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.7s ease;
-    z-index: -1;
+    letter-spacing: 0.5px;
 }
 
 .request-btn:hover {
     background-color: var(--btn-hover);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.request-btn:hover::before {
-    left: 100%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .about-section {
     padding: 60px 20px;
     background-color: rgba(0, 86, 179, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(0, 119, 204, 0.1), transparent 60%);
+    pointer-events: none;
 }
 
 .about-container {
@@ -283,9 +309,11 @@ header {
 .about-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-medium);
+    border: 3px solid rgba(255, 255, 255, 0.05);
+    will-change: transform;
 }
 
 .about-image img:hover {
@@ -322,17 +350,19 @@ header {
     margin-right: 15px;
     width: 40px;
     height: 40px;
-    background-color: rgba(0, 86, 179, 0.1);
+    background: rgba(0, 86, 179, 0.1);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 3px 5px rgba(0, 119, 204, 0.1);
 }
 
 .contact-item:hover i {
-    background-color: rgba(0, 86, 179, 0.2);
+    background: var(--gradient-primary);
     transform: scale(1.1);
+    color: white;
 }
 
 .social-media {
@@ -367,34 +397,38 @@ header {
     align-items: center;
     width: 60px;
     height: 60px;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: white;
     border-radius: 50%;
     font-size: 1.5rem;
     text-decoration: none;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform var(--transition-medium);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
 }
 
 .social-icon:hover {
     transform: translateY(-5px);
-    background-color: var(--accent-color);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .avatar-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Adicionado para permitir posicionamento absoluto do filho */
+    position: relative;
 }
 
 .avatar-image {
     max-width: 200px;
     height: auto;
-    transition: transform 0.3s ease;
-    position: absolute; /* Permite movimentar a imagem livremente */
-    top: -126px ;
-     left: -287px;
-    z-index: 2; /* Garante que a imagem fique acima de outros elementos */
+    transition: transform var(--transition-fast);
+    position: absolute;
+    top: -126px;
+    left: -287px;
+    z-index: 2;
 }
 
 .avatar-image:hover {
@@ -404,17 +438,42 @@ header {
 footer {
     background-color: var(--footer-bg);
     color: var(--footer-text);
-    padding: 30px 20px;
+    padding: -43px 20px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient-primary);
 }
 
 .footer-content {
     max-width: 1200px;
-    margin: -47px auto;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content .footer-text {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-content .footer-text {
@@ -429,7 +488,7 @@ footer {
 .footer-logo {
     max-width: 156px;
     height: auto;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-fast);
 }
 
 .footer-logo:hover {
@@ -591,4 +650,15 @@ footer {
     .footer-logo {
         max-width: 120px;
     }
+}
+
+.escritura-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.escritura-container .service-card {
+    width: 372px;
 }
